@@ -1,0 +1,53 @@
+project:
+  name: "RI Futebol Brasileiro"
+  description: "Coletor focado de notícias recentes sobre futebol brasileiro"
+
+crawler:
+  target_documents: 60000
+  max_age_days: 365
+  concurrency: 8
+  per_domain_delay_seconds: 1.0
+  request_timeout_seconds: 20
+  max_retries: 3
+  max_depth: 8
+  batch_size: 40
+  min_text_chars: 500
+  respect_robots_txt: true
+  allow_unknown_date: false
+  user_agent: "PUCMinas-RI-FutebolBot/1.0 (academic information retrieval project)"
+  database_path: "data/coleta.db"
+  discover_sitemaps: true
+  sitemap_max_files_per_domain: 80
+  sitemap_max_urls_total: 150000
+
+# As sementes são páginas editoriais públicas. O crawler permanece restrito
+# aos domínios abaixo e filtra links de futebol brasileiro antes de colocá-los
+# na fronteira.
+sources:
+  - name: "UOL Esporte"
+    seed: "https://www.uol.com.br/esporte/futebol/"
+    domains: ["uol.com.br", "www.uol.com.br"]
+
+  - name: "UOL Esporte - últimas"
+    seed: "https://www.uol.com.br/esporte/noticias/v1/"
+    domains: ["uol.com.br", "www.uol.com.br"]
+
+  - name: "Terra Futebol"
+    seed: "https://www.terra.com.br/esportes/futebol/"
+    domains: ["terra.com.br", "www.terra.com.br"]
+
+  - name: "CNN Brasil Esportes"
+    seed: "https://www.cnnbrasil.com.br/esportes/futebol/"
+    domains: ["cnnbrasil.com.br", "www.cnnbrasil.com.br"]
+
+  - name: "ESPN Brasil Futebol"
+    seed: "https://www.espn.com.br/futebol/"
+    domains: ["espn.com.br", "www.espn.com.br"]
+
+  - name: "ge Futebol"
+    seed: "https://ge.globo.com/futebol/"
+    domains: ["ge.globo.com"]
+
+  - name: "Lance Futebol"
+    seed: "https://www.lance.com.br/futebol-nacional/"
+    domains: ["lance.com.br", "www.lance.com.br"]
